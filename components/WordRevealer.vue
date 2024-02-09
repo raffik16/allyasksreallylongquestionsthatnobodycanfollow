@@ -1,12 +1,12 @@
 <template>
     <div>
         <transition name="fade">
-            <div v-if="!showInput" class="word-revealer">
+            <div v-if="!showText" class="word-revealer">
                 {{ currentWord }}
             </div>
         </transition>
         <transition name="fade">
-            <div v-if="showInput" class="kroq">
+            <div v-if="showText" class="kroq">
                 Famous words by Ally Johnson
             </div>
         </transition>
@@ -30,8 +30,7 @@ const currentWord = ref('');
 const words = props.text.split(' ');
 let index = 0;
 let intervalId;
-const showInput = ref(false);
-const userAnswer = ref('');
+const showText = ref(false);
 
 const showNextWord = () => {
     if (index < words.length) {
@@ -39,7 +38,10 @@ const showNextWord = () => {
         index += 1;
     } else {
         clearInterval(intervalId);
-        showInput.value = true; // Show the input after all words have been shown
+        // Use setTimeout to delay showing the next content
+        setTimeout(() => {
+            showText.value = true; // This will now wait 1.25 second before setting to true
+        }, 1250);
     }
 };
 
@@ -51,14 +53,13 @@ onUnmounted(() => {
     clearInterval(intervalId);
 });
 
-const handleSubmit = () => {
-    // Implement your submission logic here
-    // For example, using EmailJS or a custom backend endpoint
-    console.log("User's answer:", userAnswer.value);
-    // Reset or provide feedback as needed
-};
 </script>
-
+<style>
+body,
+html {
+    background: #eaf4fc;
+}
+</style>
 <style scoped>
 .word-revealer {
     position: absolute;
@@ -67,7 +68,7 @@ const handleSubmit = () => {
     font-family: 'Barlow', sans-serif;
     font-family: 400;
     transform: translate(-50%, -50%);
-
+    color: rgb(93, 168, 7);
     font-size: 100px;
 }
 
@@ -80,15 +81,12 @@ const handleSubmit = () => {
     display: flex;
     font-size: 24px;
     font-family: 'Barlow', sans-serif;
+    color: rgb(93, 168, 7);
+
     font-family: 400;
     text-align: center;
 }
 
-
-/* .img {
-    width: 100%;
-    height: 100%;
-} */
 
 .fade-enter-active,
 .fade-leave-active {
