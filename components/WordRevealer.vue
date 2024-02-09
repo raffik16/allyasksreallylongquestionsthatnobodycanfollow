@@ -5,14 +5,13 @@
                 {{ currentWord }}
             </div>
         </transition>
+
         <transition name="fade">
             <div v-if="showText" class="kroq">
                 Famous words by Ally Johnson
             </div>
         </transition>
-        <transition name="fade">
 
-        </transition>
     </div>
 </template>
 
