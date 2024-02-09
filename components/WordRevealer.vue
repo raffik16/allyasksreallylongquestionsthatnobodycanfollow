@@ -7,8 +7,12 @@
         <transition name="fade">
             <div v-if="showText" class="kroq">
                 Famous words by Ally Johnson
-                <button v-if="showReplayButton" @click="replay" class="replay-btn">Replay</button>
+                <button v-if="showReplayButton && currentTextIndex < props.texts.length - 1" @click="replay"
+                    class="replay-btn">Replay</button>
+                <button v-else-if="showReplayButton" @click="startOver" class="replay-btn">Start Over</button>
                 <button v-if="showNextQuestionButton" @click="nextQuestion" class="next-question-btn">Next Question</button>
+
+
             </div>
         </transition>
     </div>
@@ -41,12 +45,22 @@ const showNextWord = () => {
         clearInterval(intervalId);
         setTimeout(() => {
             showText.value = true;
-            showReplayButton.value = true;
-            if (currentTextIndex < props.texts.length - 1) {
-                showNextQuestionButton.value = true; // Show if there are more texts to display
+            // Update logic for the last question
+            if (currentTextIndex === props.texts.length - 1) {
+                showNextQuestionButton.value = false; // No next question, so hide this button
+                // Show a "Start Over" button instead of "Replay" on the last question
+                showReplayButton.value = true; // Could repurpose or rename this for clarity
+            } else {
+                showReplayButton.value = true;
+                showNextQuestionButton.value = true;
             }
         }, 1000);
     }
+};
+
+const startOver = () => {
+    currentTextIndex = 0; // Reset to the first text
+    setupNextText(); // Initialize the component for the first text
 };
 
 const replay = () => {
@@ -61,22 +75,29 @@ const replay = () => {
 const nextQuestion = () => {
     if (currentTextIndex < props.texts.length - 1) {
         currentTextIndex++;
-        index = 0; // Reset the index for the new text
-        // Immediately clear the current word display to avoid flash of previous text
-        currentWord.value = '';
-        // Prepare the words for the new text
-        words = props.texts[currentTextIndex].split(' ');
-        // Reset the display states
-        showText.value = false;
-        showReplayButton.value = false;
-        showNextQuestionButton.value = false;
-        // Clear any existing interval to avoid duplicates
-        clearInterval(intervalId);
-        // Delay the start of the next question to ensure a clean transition
-        // This also allows for any animations or transitions to complete
-        intervalId = setInterval(showNextWord, 500);
+        // Prepare for the next set of words
+        setupNextText();
     }
 };
+
+const setupNextText = () => {
+    // Reset the index and clear the current word for a clean start
+    index = 0;
+    currentWord.value = '';
+    // Prepare the words for the new text
+    words = props.texts[currentTextIndex].split(' ');
+    // Make sure to clear any existing interval and reset visibility states
+    clearInterval(intervalId);
+    showText.value = false;
+    showReplayButton.value = false;
+    showNextQuestionButton.value = false;
+    // Allow a brief moment before starting to display the next set of words
+    // This ensures a clean transition, especially if there's any lingering UI updates
+    setTimeout(() => {
+        intervalId = setInterval(showNextWord, 500);
+    }, 100);
+};
+
 
 onMounted(() => {
     intervalId = setInterval(showNextWord, 500);
@@ -129,6 +150,8 @@ html {
     border: none;
     padding: 8px 12px;
     border-radius: 50px;
+
+    cursor: pointer;
 }
 
 .fade-enter-active,
