@@ -2,7 +2,8 @@
   <div>
     <Title>Ally asks really long questions that nobody can follow.com</Title>
     <word-revealer :texts="questions" />
-    <nuxt-img class="img" src="seal.png" />
+    <img class="img"
+      src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Seal_of_the_President_of_the_United_States.svg/1920px-Seal_of_the_President_of_the_United_States.svg.png" />
   </div>
 </template>
 
