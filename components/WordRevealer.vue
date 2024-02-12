@@ -11,11 +11,10 @@
                     class="replay-btn">Replay</button>
                 <button v-else-if="showReplayButton" @click="startOver" class="replay-btn">Start Over</button>
                 <button v-if="showNextQuestionButton" @click="nextQuestion" class="next-question-btn">Next Question</button>
+
+
             </div>
         </transition>
-
-
-
     </div>
 </template>
 
@@ -29,7 +28,6 @@ const props = defineProps({
         required: true,
     },
 });
-
 let currentTextIndex = 0; // Index to track the current text being shown
 const currentWord = ref('');
 let words = props.texts[currentTextIndex]?.split(' ') || []; // Safely handle potential undefined value
@@ -38,42 +36,26 @@ let intervalId;
 const showText = ref(false);
 const showReplayButton = ref(false);
 const showNextQuestionButton = ref(false); // New ref to control the visibility of the "Next Question" button
-const isMuted = ref(false); // Track mute state
-const isSpeaking = ref(false);
 
 const showNextWord = () => {
     if (index < words.length) {
-        // Only set isSpeaking to true at the start of the sequence
-        if (index === 0) {
-            isSpeaking.value = true;
-        }
-
         currentWord.value = words[index];
-        if (!isMuted.value) {
-            const utterance = new SpeechSynthesisUtterance(words[index]);
-            utterance.rate = 0.8;
-            utterance.onend = () => {
-                // Check if this was the last word
-                if (index >= words.length - 1) {
-                    isSpeaking.value = false; // No more words to speak
-                }
-                // Logic to move to the next word or handle end of speech remains the same
-            };
-            speechSynthesis.speak(utterance);
-        }
         index += 1;
     } else {
-        // When all words have been processed
         clearInterval(intervalId);
-        intervalId = null;
-        isSpeaking.value = false; // Ensure this is outside the if (!isMuted.value) block
-        // Handle showing text or replay options as before
+        setTimeout(() => {
+            showText.value = true;
+            // Update logic for the last question
+            if (currentTextIndex === props.texts.length - 1) {
+                showNextQuestionButton.value = false; // No next question, so hide this button
+                // Show a "Start Over" button instead of "Replay" on the last question
+                showReplayButton.value = true; // Could repurpose or rename this for clarity
+            } else {
+                showReplayButton.value = true;
+                showNextQuestionButton.value = true;
+            }
+        }, 1000);
     }
-};
-
-
-const toggleMute = () => {
-    isMuted.value = !isMuted.value;
 };
 
 const startOver = () => {

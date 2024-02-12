@@ -4,9 +4,9 @@
     <word-revealer :texts="questions" />
 
     <div class="meta">
-      <p>
+      <!-- <p>
         Tap for audio
-      </p>
+      </p> -->
       <img class="img"
         src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Seal_of_the_President_of_the_United_States.svg/1920px-Seal_of_the_President_of_the_United_States.svg.png" />
     </div>
