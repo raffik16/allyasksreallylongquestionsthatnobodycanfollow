@@ -2,6 +2,7 @@
   <div>
     <Title>Ally asks really long questions that nobody can follow.com</Title>
     <word-revealer :texts="questions" />
+    <img class="img" src="seal.png" />
   </div>
 </template>
 
@@ -10,3 +11,12 @@ const questions = ["It was kind of expensive right. Is it still. So I mean is it
 
 // const questions = ["It was kind of expensive right?", "Fluffy you wear pants ever?"]
 </script>
+<style scoped>
+.img {
+  width: 70px;
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+</style>
