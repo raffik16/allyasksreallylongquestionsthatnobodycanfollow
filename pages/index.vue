@@ -2,7 +2,7 @@
   <div>
     <Title>Ally asks really long questions that nobody can follow.com</Title>
     <word-revealer :texts="questions" />
-    <img class="img" src="seal.png" />
+    <nuxt-img class="img" src="seal.png" />
   </div>
 </template>
 
