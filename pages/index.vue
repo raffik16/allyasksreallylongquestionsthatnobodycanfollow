@@ -2,8 +2,14 @@
   <div>
     <Title>Ally asks really long questions that nobody can follow.com</Title>
     <word-revealer :texts="questions" />
-    <img class="img"
-      src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Seal_of_the_President_of_the_United_States.svg/1920px-Seal_of_the_President_of_the_United_States.svg.png" />
+
+    <div class="meta">
+      <p>
+        Tap for audio
+      </p>
+      <img class="img"
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Seal_of_the_President_of_the_United_States.svg/1920px-Seal_of_the_President_of_the_United_States.svg.png" />
+    </div>
   </div>
 </template>
 
@@ -13,11 +19,16 @@ const questions = ["It was kind of expensive right. Is it still. So I mean is it
 // const questions = ["It was kind of expensive right?", "Fluffy you wear pants ever?"]
 </script>
 <style scoped>
-.img {
-  width: 70px;
+.meta {
   position: absolute;
   bottom: 30px;
   left: 50%;
   transform: translateX(-50%);
+  text-align: center;
+  color: #91989e;
+}
+
+.img {
+  width: 70px;
 }
 </style>
