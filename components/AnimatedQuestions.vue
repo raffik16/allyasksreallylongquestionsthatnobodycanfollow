@@ -101,7 +101,7 @@
     cursor: pointer;
     position: absolute;
     font-family: cursive;
-    bottom: 20px;
+    bottom: 50px;
     left: 20px;
     z-index: 10;
     font-weight: bold;
