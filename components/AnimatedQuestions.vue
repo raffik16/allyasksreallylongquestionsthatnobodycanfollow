@@ -87,7 +87,7 @@
   @keyframes waveIn {
     0% {
       opacity: 0;
-      transform: translateY(20px) scale(0);
+      transform: translateY(50px) scale(0);
     }
     100% {
       opacity: 1;
@@ -97,13 +97,14 @@
   
   button {
     padding: 5px 10px;
-    font-size: 14px;
+    font-size: 16px;
     cursor: pointer;
     position: absolute;
     font-family: cursive;
     bottom: 20px;
     left: 20px;
     z-index: 10;
+    font-weight: bold;
   }
   </style>
   
