@@ -11,8 +11,6 @@
                     class="replay-btn">Replay</button>
                 <button v-else-if="showReplayButton" @click="startOver" class="replay-btn">Start Over</button>
                 <button v-if="showNextQuestionButton" @click="nextQuestion" class="next-question-btn">Next Question</button>
-
-
             </div>
         </transition>
     </div>

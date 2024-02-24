@@ -1,7 +1,8 @@
 <template>
   <div>
     <Title>Ally asks really long questions that nobody can follow.com</Title>
-    <word-revealer :texts="questions" />
+    <!-- <word-revealer :texts="questions" /> -->
+    <animated-questions :questions="questions" />
 
     <div class="meta">
       <!-- <p>
