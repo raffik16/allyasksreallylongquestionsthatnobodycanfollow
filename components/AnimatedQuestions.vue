@@ -102,7 +102,7 @@
     position: absolute;
     font-family: cursive;
     bottom: 50px;
-    left: 20px;
+    right: 20px;
     z-index: 10;
     font-weight: bold;
   }
