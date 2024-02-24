@@ -81,7 +81,7 @@
     font-size: 16px;
     font-family: cursive;
     color: rgb(93, 168, 7);
-
+    font-weight: bold;
   }
   
   @keyframes waveIn {
@@ -101,8 +101,8 @@
     cursor: pointer;
     position: absolute;
     font-family: cursive;
-    bottom: 0;
-    left: 0;
+    bottom: 20px;
+    left: 20px;
     z-index: 10;
   }
   </style>
