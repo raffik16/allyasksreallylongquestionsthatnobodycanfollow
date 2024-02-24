@@ -68,7 +68,7 @@
     left: 50%;
     transform: translate(-50%,-50%);
     width: 100%;
-    padding: 0 5px;
+    padding: 0 20px;
     box-sizing: border-box;
   }
   
